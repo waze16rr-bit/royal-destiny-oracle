@@ -1,6 +1,5 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import { Helmet } from "react-helmet-async";
 import {
   questions, oracleOpinions, scoreAnswers, personalities,
   type Letter, type Hue,
@@ -26,6 +25,14 @@ const Index = () => {
     return personalities[scoreAnswers(answers)];
   }, [stage, answers]);
 
+  useEffect(() => {
+    document.title = "The Royal Oracle — Personality of the Crown";
+    const meta = document.querySelector('meta[name="description"]') ?? (() => {
+      const m = document.createElement("meta"); m.setAttribute("name", "description"); document.head.appendChild(m); return m;
+    })();
+    meta.setAttribute("content", "A 13-verse mystical personality rite. Discover which of the 16 royal souls slumbers within thee, judged by the Ancient Oracle.");
+  }, []);
+
   const handleAnswer = (letter: Letter) => {
     const q = questions[step];
     const opt = q.options.find(o => o.letter === letter);
@@ -48,12 +55,6 @@ const Index = () => {
 
   return (
     <>
-      <Helmet>
-        <title>The Royal Oracle — Personality of the Crown</title>
-        <meta name="description" content="A 13-verse mystical personality rite. Discover which of the 16 royal souls slumbers within thee, judged by the Ancient Oracle." />
-        <link rel="canonical" href="/" />
-      </Helmet>
-
       <HuePainter hue={hue} />
       <div className="starfield" />
 
