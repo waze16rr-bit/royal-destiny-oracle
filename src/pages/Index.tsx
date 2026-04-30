@@ -43,7 +43,6 @@ const Index = () => {
 
     if (step + 1 >= questions.length) {
       setStage("loading");
-      setTimeout(() => setStage("result"), 2800);
     } else {
       setTimeout(() => setStep(step + 1), 450);
     }
@@ -81,7 +80,7 @@ const Index = () => {
                 onAnswer={handleAnswer}
               />
             )}
-            {stage === "loading" && <Loading key="loading" />}
+            {stage === "loading" && <Loading key="loading" onContinue={() => setStage("result")} />}
             {stage === "result" && result && (
               <Result key="result" p={result} onRestart={restart} />
             )}
