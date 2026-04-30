@@ -1,3 +1,3 @@
-# Welcome to your Lovable project
+# Royal Destiny Oracle
 
 TODO: Document your project here
